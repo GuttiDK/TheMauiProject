@@ -23,6 +23,11 @@
             />
 
         <ShellContent
+            Title="Tip Calculator"
+            ContentTemplate="{DataTemplate views:TipCalculator}"
+            />
+
+        <ShellContent
             Title="About"
             ContentTemplate="{DataTemplate views:AboutPage}"
             />
