@@ -4,7 +4,7 @@
              x:Class="MauiHello.Views.TipCalculator"
              Title="TipCalculator">
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="20">
+        <VerticalStackLayout Padding="5" Spacing="5">
 
             <Label Text="Bill" FontAttributes="Bold" FontSize="20" />
             <Entry x:Name="billEntry"
