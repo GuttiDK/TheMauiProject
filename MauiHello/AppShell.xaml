@@ -12,14 +12,19 @@
             ContentTemplate="{DataTemplate views:MainPage}"
             Route="MainPage" />
 
-        <ShellContent
+        <!--<ShellContent
             Title="Notes"
             ContentTemplate="{DataTemplate views:NotePage}"
-             />
+             />-->
 
         <ShellContent
             Title="All Notes"
             ContentTemplate="{DataTemplate views:AllNotesPage}"
+            />
+
+        <ShellContent
+            Title="Register"
+            ContentTemplate="{DataTemplate views:CustomRegisterPage}"
             />
 
         <ShellContent
