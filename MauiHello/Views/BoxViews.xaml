@@ -3,25 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiHello.Views.BoxViews"
              Title="BoxViews">
-    <VerticalStackLayout
-        BackgroundColor="Aquamarine"
-        Spacing="0"
-        VerticalOptions="Start">
+     <Grid ColumnDefinitions="*,*" RowDefinitions="*,*">
         <BoxView
+            Grid.Row="0"
+            Grid.Column="0"
             HeightRequest="100"
             HorizontalOptions="Start"
+            VerticalOptions="Start"
             WidthRequest="100"
             Color="Red" />
         <BoxView
+            Grid.Row="0"
+            Grid.Column="1"
             HeightRequest="100"
-            HorizontalOptions="Center"
             WidthRequest="100"
             Color="Yellow" />
         <BoxView
+            Grid.Row="1"
+            Grid.Column="0"
             HeightRequest="100"
             HorizontalOptions="End"
+            VerticalOptions="Start"
             WidthRequest="100"
             Color="Green" />
-    </VerticalStackLayout>
+        <BoxView
+            Grid.Row="1"
+            Grid.Column="1"
+            HeightRequest="100"
+            HorizontalOptions="End"
+            VerticalOptions="End"
+            WidthRequest="100"
+            Color="Blue" />
+    </Grid>
 
 </ContentPage>

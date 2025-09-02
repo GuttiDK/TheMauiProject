@@ -23,6 +23,11 @@
             />
 
         <ShellContent
+            Title="Test Page"
+            ContentTemplate="{DataTemplate views:TestPage}"
+            />
+
+        <ShellContent
             Title="BoxViews"
             ContentTemplate="{DataTemplate views:BoxViews}"
             />

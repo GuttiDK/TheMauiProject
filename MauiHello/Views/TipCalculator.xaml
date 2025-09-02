@@ -2,85 +2,126 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiHello.Views.TipCalculator"
-             Title="TipCalculator">
-    <ScrollView>
-        <VerticalStackLayout Padding="40" Spacing="10">
+             Title="Home">
 
-            <!-- Bill group -->
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="Bill"
-                       FontAttributes="Bold"
-                       FontSize="20"
-                       WidthRequest="100"
-                       VerticalOptions="Center" />
-                <Entry x:Name="billEntry"
-                       Placeholder="Enter Amount"
-                       Keyboard="Numeric"
-                       TextChanged="OnBillOrTipChanged" />
-            </HorizontalStackLayout>
+    <Grid RowDefinitions="Auto,*,Auto,Auto"
+          Padding="0">
 
-            <!-- Tip group -->
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="Tip"
-                       FontSize="18"
-                       WidthRequest="100"
-                       VerticalOptions="Center" />
-                <Label x:Name="tipLabel"
-                       FontSize="18"
-                       VerticalOptions="Center" />
-            </HorizontalStackLayout>
+        <!-- Bill/Tip/Total area -->
+        <Grid Grid.Row="0"
+              Padding="40,30,40,0"
+              ColumnSpacing="10"
+              RowSpacing="10"
+              RowDefinitions="Auto,Auto,Auto"
+              ColumnDefinitions="*,*">
+            <Label Text="Bill"
+                   VerticalOptions="Center"
+                   FontSize="16"
+                   Grid.Row="0"
+                   Grid.Column="0" />
+            <Entry x:Name="billEntry"
+                   Placeholder="Enter Amount"
+                   Keyboard="Numeric"
+                   TextChanged="OnBillOrTipChanged"
+                   FontSize="16"
+                   Grid.Row="0"
+                   Grid.Column="1" />
 
-            <!-- Total group -->
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="Total"
-                       FontSize="18"
-                       FontAttributes="Bold"
-                       WidthRequest="100"
-                       VerticalOptions="Center" />
-                <Label x:Name="totalLabel"
-                       FontSize="18"
-                       FontAttributes="Bold"
-                       VerticalOptions="Center" />
-            </HorizontalStackLayout>
+            <Label Text="Tip"
+                   VerticalOptions="Center"
+                   FontSize="16"
+                   Grid.Row="1"
+                   Grid.Column="0" />
+            <Label x:Name="tipLabel"
+                   Text="0.00"
+                   VerticalOptions="Center"
+                   FontSize="16"
+                   Grid.Row="1"
+                   Grid.Column="1" />
 
-            <!-- Tip Percentage group -->
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="Tip Percentage"
-                       FontSize="18"
-                       WidthRequest="100"
-                       VerticalOptions="Center" />
-                <Label x:Name="percentageLabel"
-                       FontSize="16"
-                       VerticalOptions="Center" />
-            </HorizontalStackLayout>
+            <Label Text="Total"
+                   VerticalOptions="Center"
+                   FontSize="16"
+                   Grid.Row="2"
+                   Grid.Column="0" />
+            <Label x:Name="totalLabel"
+                   Text="0.00"
+                   VerticalOptions="Center"
+                   FontSize="16"
+                   Grid.Row="2"
+                   Grid.Column="1" />
+        </Grid>
 
-            <!-- Slider -->
+        <!-- Tip controls at bottom -->
+        <Grid Grid.Row="2"
+              Padding="30,0,30,0"
+              RowDefinitions="Auto,Auto,Auto"
+              ColumnDefinitions="*,*"
+              VerticalOptions="End">
+
+            <!-- Tip Percentage row -->
+            <Label Text="Tip Percentage"
+                   FontSize="16"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   VerticalOptions="Center" />
+            <Label x:Name="percentageLabel"
+                   FontSize="16"
+                   Text="15%"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   Grid.Row="0"
+                   Grid.Column="1" />
+
+            <!-- Slider row -->
             <Slider x:Name="tipSlider"
                     Minimum="0"
                     Maximum="100"
                     Value="15"
-                    ValueChanged="OnSliderChanged" />
+                    ValueChanged="OnSliderChanged"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,5,0,15" />
 
-            <!-- Button group: 15% and 20% -->
-            <HorizontalStackLayout Spacing="10" Margin="0,20,0,0" HorizontalOptions="Center">
+            <!-- Buttons row -->
+            <Grid Grid.Row="2"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  RowDefinitions="Auto,Auto"
+                  ColumnDefinitions="*,*"
+                  ColumnSpacing="15"
+                  RowSpacing="10"
+                  HorizontalOptions="Center">
+
                 <Button Text="15%"
                         WidthRequest="150"
-                        Clicked="OnFifteenPercentClicked" />
+                        CornerRadius="10"
+                        Clicked="OnFifteenPercentClicked"
+                        Grid.Row="0"
+                        Grid.Column="0" />
+
                 <Button Text="20%"
                         WidthRequest="150"
-                        Clicked="OnTwentyPercentClicked" />
-            </HorizontalStackLayout>
+                        CornerRadius="10"
+                        Clicked="OnTwentyPercentClicked"
+                        Grid.Row="0"
+                        Grid.Column="1" />
 
-            <!-- Button group: Round Down and Round Up -->
-            <HorizontalStackLayout Spacing="10" Margin="0,10,0,0" HorizontalOptions="Center">
                 <Button Text="Round Down"
                         WidthRequest="150"
-                        Clicked="OnRoundDownClicked" />
+                        CornerRadius="10"
+                        Clicked="OnRoundDownClicked"
+                        Grid.Row="1"
+                        Grid.Column="0" />
+
                 <Button Text="Round Up"
                         WidthRequest="150"
-                        Clicked="OnRoundUpClicked" />
-            </HorizontalStackLayout>
-
-        </VerticalStackLayout>
-    </ScrollView>
+                        CornerRadius="10"
+                        Clicked="OnRoundUpClicked"
+                        Grid.Row="1"
+                        Grid.Column="1" />
+            </Grid>
+        </Grid>
+    </Grid>
 </ContentPage>
