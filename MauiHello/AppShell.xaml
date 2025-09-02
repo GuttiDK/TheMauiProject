@@ -17,20 +17,16 @@
             ContentTemplate="{DataTemplate views:NotePage}"
              />-->
 
-        <ShellContent
+        <!--<ShellContent
             Title="VerticalStackLayout"
             ContentTemplate="{DataTemplate views:VerticalStackLayout}"
-            />
+            />-->
 
-        <ShellContent
-            Title="Test Page"
-            ContentTemplate="{DataTemplate views:TestPage}"
-            />
 
-        <ShellContent
+        <!--<ShellContent
             Title="BoxViews"
             ContentTemplate="{DataTemplate views:BoxViews}"
-            />
+            />-->
 
         <ShellContent
             Title="All Notes"
@@ -43,8 +39,18 @@
             />
 
         <ShellContent
+            Title="Calculator"
+            ContentTemplate="{DataTemplate views:CalculatorPage}"
+            />
+
+        <ShellContent
             Title="Tip Calculator"
             ContentTemplate="{DataTemplate views:TipCalculator}"
+            />
+
+        <ShellContent
+            Title="Test Page"
+            ContentTemplate="{DataTemplate views:TestPage}"
             />
 
         <ShellContent
