@@ -3,6 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiHello.Views.MainPage">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="About" Clicked="AboutToolbarItem_Clicked" />
+        <ToolbarItem Text="Feedback" Clicked="FeedbackToolbarItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"

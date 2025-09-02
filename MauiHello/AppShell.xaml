@@ -53,9 +53,9 @@
             ContentTemplate="{DataTemplate views:TestPage}"
             />
 
-        <ShellContent
+        <!--<ShellContent
             Title="About"
             ContentTemplate="{DataTemplate views:AboutPage}"
-            />
+            />-->
     </TabBar>
 </Shell>

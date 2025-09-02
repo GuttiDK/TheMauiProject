@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiHello.Views.FeedbackPage"
+             Title="Feedback"
+             NavigationPage.HasBackButton="False">
+    <VerticalStackLayout Padding="30" Spacing="20">
+        <Label Text="We value your feedback!" FontSize="24" HorizontalOptions="Center" />
+        
+        <Editor x:Name="feedbackEditor"
+                Placeholder="Write your feedback here..."
+                AutoSize="TextChanges"
+                MaxLength="500"
+                HeightRequest="120"
+                />
+
+        <Label Text="Rate your experience:" FontSize="18" />
+        <Slider x:Name="ratingSlider"
+                Minimum="1"
+                Maximum="5"
+                Value="3"
+                />
+
+        <Label x:Name="ratingLabel"
+               Text="Rating: 3"
+               FontSize="16"
+               HorizontalOptions="Center" />
+
+        <Button Text="Submit"
+                Clicked="OnSubmitClicked"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                />
+
+        <Button Text="Back"
+                Clicked="OnBackClicked"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                />
+
+        <Label x:Name="confirmationLabel"
+               Text=""
+               TextColor="Green"
+               FontSize="16"
+               HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>
