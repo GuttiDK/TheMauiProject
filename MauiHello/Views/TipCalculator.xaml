@@ -16,8 +16,7 @@
                 <Entry x:Name="billEntry"
                        Placeholder="Enter Amount"
                        Keyboard="Numeric"
-                       TextChanged="OnBillOrTipChanged"
-                       HorizontalOptions="FillAndExpand" />
+                       TextChanged="OnBillOrTipChanged" />
             </HorizontalStackLayout>
 
             <!-- Tip group -->
