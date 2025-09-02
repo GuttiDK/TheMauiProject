@@ -1,81 +1,107 @@
-using Microsoft.Maui;
+using System;
+using Microsoft.Maui.Controls;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
-namespace MauiHello.Views;
-
-public partial class TipCalculator : ContentPage
+namespace MauiHello.Views
 {
-    public TipCalculator()
+    public partial class TipCalculator : ContentPage
     {
-        InitializeComponent();
-        CalculateTip(); // Initial beregning
-    }
-
-    private void OnSliderChanged(object sender, ValueChangedEventArgs e)
-    {
-        percentageLabel.Text = $"{(int)tipSlider.Value}%";
-        CalculateTip();
-    }
-
-    private void OnBillOrTipChanged(object sender, TextChangedEventArgs e)
-    {
-        CalculateTip();
-    }
-
-    private void OnFifteenPercentClicked(object sender, EventArgs e)
-    {
-        tipSlider.Value = 15;
-    }
-
-    private void OnTwentyPercentClicked(object sender, EventArgs e)
-    {
-        tipSlider.Value = 20;
-    }
-
-    private void OnRoundDownClicked(object sender, EventArgs e)
-    {
-        if (!double.TryParse(billEntry.Text, out double billAmount)) return;
-
-        double tipPercent = tipSlider.Value / 100;
-        double tip = billAmount * tipPercent;
-        double total = billAmount + tip;
-
-        double roundedTotal = Math.Floor(total / 10) * 10;
-        double newTip = roundedTotal - billAmount;
-
-        tipLabel.Text = $"Tip: {newTip.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
-        totalLabel.Text = $"Total: {roundedTotal.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
-    }
-
-    private void OnRoundUpClicked(object sender, EventArgs e)
-    {
-        if (!double.TryParse(billEntry.Text, out double billAmount)) return;
-
-        double tipPercent = tipSlider.Value / 100;
-        double tip = billAmount * tipPercent;
-        double total = billAmount + tip;
-
-        double roundedTotal = Math.Ceiling(total / 10) * 10;
-        double newTip = roundedTotal - billAmount;
-
-        tipLabel.Text = $"Tip: {newTip.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
-        totalLabel.Text = $"Total: {roundedTotal.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
-    }
-
-    private void CalculateTip()
-    {
-        if (!double.TryParse(billEntry.Text, out double billAmount))
+        public TipCalculator()
         {
-            tipLabel.Text = "Tip: ";
-            totalLabel.Text = "Total: ";
-            return;
+            InitializeComponent();
+            billEntry.Text = "0,00"; // Set default value
+            UpdateTipAndTotal();
         }
 
-        double tipPercent = tipSlider.Value / 100;
-        double tip = billAmount * tipPercent;
-        double total = billAmount + tip;
+        private void OnBillOrTipChanged(object sender, EventArgs e)
+        {
+            // Remove non-numeric characters except decimal separator
+            string input = billEntry.Text ?? "";
 
-        tipLabel.Text = $"Tip: {tip.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
-        totalLabel.Text = $"Total: {total.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
+            // Only allow digits and one decimal separator
+            string decimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+            string pattern = $"[^0-9{Regex.Escape(decimalSeparator)}]";
+            input = Regex.Replace(input, pattern, "");
+
+            // Prevent multiple decimal separators
+            int firstSeparator = input.IndexOf(decimalSeparator);
+            if (firstSeparator >= 0)
+            {
+                int lastSeparator = input.LastIndexOf(decimalSeparator);
+                if (lastSeparator != firstSeparator)
+                {
+                    input = input.Remove(lastSeparator, 1);
+                }
+            }
+
+            // Prevent negative numbers
+            if (input.StartsWith("-"))
+                input = input.TrimStart('-');
+
+            // If empty, set to 0.00
+            if (string.IsNullOrWhiteSpace(input))
+                input = "0,00";
+
+            // Update the Entry text if changed
+            if (billEntry.Text != input)
+                billEntry.Text = input;
+
+            UpdateTipAndTotal();
+        }
+
+        private void OnSliderChanged(object sender, ValueChangedEventArgs e)
+        {
+            percentageLabel.Text = $"{(int)tipSlider.Value}%";
+            UpdateTipAndTotal();
+        }
+
+        private void OnFifteenPercentClicked(object sender, EventArgs e)
+        {
+            tipSlider.Value = 15;
+        }
+
+        private void OnTwentyPercentClicked(object sender, EventArgs e)
+        {
+            tipSlider.Value = 20;
+        }
+
+        private void OnRoundDownClicked(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(billEntry.Text, out decimal bill))
+            {
+                decimal tip = bill * (decimal)tipSlider.Value / 100;
+                decimal total = bill + tip;
+                total = Math.Floor(total);
+                totalLabel.Text = $"{total.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
+            }
+        }
+
+        private void OnRoundUpClicked(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(billEntry.Text, out decimal bill))
+            {
+                decimal tip = bill * (decimal)tipSlider.Value / 100;
+                decimal total = bill + tip;
+                total = Math.Ceiling(total);
+                totalLabel.Text = $"{total.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
+            }
+        }
+
+        private void UpdateTipAndTotal()
+        {
+            if (decimal.TryParse(billEntry.Text, out decimal bill))
+            {
+                decimal tip = bill * (decimal)tipSlider.Value / 100;
+                decimal total = bill + tip;
+                tipLabel.Text = $"{tip.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
+                totalLabel.Text = $"{total.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
+            }
+            else
+            {
+                tipLabel.Text = "";
+                totalLabel.Text = "";
+            }
+        }
     }
 }
