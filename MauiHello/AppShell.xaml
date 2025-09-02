@@ -18,6 +18,16 @@
              />-->
 
         <ShellContent
+            Title="VerticalStackLayout"
+            ContentTemplate="{DataTemplate views:VerticalStackLayout}"
+            />
+
+        <ShellContent
+            Title="BoxViews"
+            ContentTemplate="{DataTemplate views:BoxViews}"
+            />
+
+        <ShellContent
             Title="All Notes"
             ContentTemplate="{DataTemplate views:AllNotesPage}"
             />
