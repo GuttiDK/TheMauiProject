@@ -6,56 +6,54 @@
     xmlns:views="clr-namespace:MauiHello.Views"
     Title="MauiHello">
 
-    <TabBar>
+    <FlyoutItem Title="Home" Icon="house.png">
         <ShellContent
             Title="Home"
             ContentTemplate="{DataTemplate views:MainPage}"
             Route="MainPage" />
+    </FlyoutItem>
 
-        <!--<ShellContent
-            Title="Notes"
-            ContentTemplate="{DataTemplate views:NotePage}"
-             />-->
+    <FlyoutItem Title="Main" Icon="book.png" FlyoutDisplayOptions="AsMultipleItems">
+        <Tab Title="Main">
+            <ShellContent
+                Title="All Notes"
+                ContentTemplate="{DataTemplate views:AllNotesPage}"
+                Icon="file.png" />
 
-        <!--<ShellContent
-            Title="VerticalStackLayout"
-            ContentTemplate="{DataTemplate views:VerticalStackLayout}"
-            />-->
+            <ShellContent
+                Title="Calculator"
+                ContentTemplate="{DataTemplate views:CalculatorPage}"
+                Icon="calculator.png" />
 
+            <ShellContent
+                Title="Tip Calculator"
+                ContentTemplate="{DataTemplate views:TipCalculator}"
+                Icon="coins.png" />
 
-        <!--<ShellContent
-            Title="BoxViews"
-            ContentTemplate="{DataTemplate views:BoxViews}"
-            />-->
+            <ShellContent
+                Title="Register"
+                ContentTemplate="{DataTemplate views:CustomRegisterPage}"
+                Icon="user.png" />
+        </Tab>
+    </FlyoutItem>
 
-        <ShellContent
-            Title="All Notes"
-            ContentTemplate="{DataTemplate views:AllNotesPage}"
-            />
+    <FlyoutItem Title="Testing" Icon="vial.png" FlyoutDisplayOptions="AsMultipleItems">
+        <Tab Title="Testing">
+            <ShellContent
+                Title="VerticalStackLayout"
+                ContentTemplate="{DataTemplate views:VerticalStackLayout}"
+                Icon="layer.png" />
 
-        <ShellContent
-            Title="Register"
-            ContentTemplate="{DataTemplate views:CustomRegisterPage}"
-            />
+            <ShellContent
+                Title="BoxViews"
+                ContentTemplate="{DataTemplate views:BoxViews}"
+                Icon="box.png" />
 
-        <ShellContent
-            Title="Calculator"
-            ContentTemplate="{DataTemplate views:CalculatorPage}"
-            />
+            <ShellContent
+                Title="Test Page"
+                ContentTemplate="{DataTemplate views:TestPage}"
+                Icon="vial.png" />
+        </Tab>
+    </FlyoutItem>
 
-        <ShellContent
-            Title="Tip Calculator"
-            ContentTemplate="{DataTemplate views:TipCalculator}"
-            />
-
-        <ShellContent
-            Title="Test Page"
-            ContentTemplate="{DataTemplate views:TestPage}"
-            />
-
-        <!--<ShellContent
-            Title="About"
-            ContentTemplate="{DataTemplate views:AboutPage}"
-            />-->
-    </TabBar>
 </Shell>

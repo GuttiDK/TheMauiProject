@@ -60,6 +60,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiFont Include="Resources\Images\book.svg" />
+	  <MauiFont Include="Resources\Images\calculator.svg" />
+	  <MauiFont Include="Resources\Images\coins.svg" />
+	  <MauiFont Include="Resources\Images\file.svg" />
+	  <MauiFont Include="Resources\Images\house.svg" />
+	  <MauiFont Include="Resources\Images\user.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
 	</ItemGroup>
