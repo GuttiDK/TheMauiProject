@@ -88,7 +88,7 @@
             <Grid Grid.Row="2"
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
-                  RowDefinitions="Auto,Auto"
+                  RowDefinitions="Auto,Auto,Auto"
                   ColumnDefinitions="*,*"
                   ColumnSpacing="15"
                   RowSpacing="10"
@@ -121,6 +121,14 @@
                         Clicked="OnRoundUpClicked"
                         Grid.Row="1"
                         Grid.Column="1" />
+
+                <Button Text="Currency"
+                        WidthRequest="150"
+                        CornerRadius="10"
+                        Clicked="OnCurrencyClicked"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2" />
             </Grid>
         </Grid>
     </Grid>

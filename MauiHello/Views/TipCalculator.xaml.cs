@@ -7,6 +7,8 @@ namespace MauiHello.Views
 {
     public partial class TipCalculator : ContentPage
     {
+        private CultureInfo currentCulture = CultureInfo.CreateSpecificCulture("da-DK");
+
         public TipCalculator()
         {
             InitializeComponent();
@@ -56,14 +58,23 @@ namespace MauiHello.Views
             UpdateTipAndTotal();
         }
 
-        private void OnFifteenPercentClicked(object sender, EventArgs e)
+        private async void OnFifteenPercentClicked(object sender, EventArgs e)
         {
+            // Show alert for normal tip
+            await DisplayAlert("Normal Tip", "Du har valgt normal tip på 15%", "OK");
             tipSlider.Value = 15;
         }
 
-        private void OnTwentyPercentClicked(object sender, EventArgs e)
+        private async void OnTwentyPercentClicked(object sender, EventArgs e)
         {
-            tipSlider.Value = 20;
+            // Ask user if they want to give generous tip
+            bool answer = await DisplayAlert("Generøs Tip", "Vil du give en generøs tip på 20%?", "Yes", "No");
+            
+            // Only set to 20% if user answered Yes
+            if (answer)
+            {
+                tipSlider.Value = 20;
+            }
         }
 
         private void OnRoundDownClicked(object sender, EventArgs e)
@@ -73,7 +84,7 @@ namespace MauiHello.Views
                 decimal tip = bill * (decimal)tipSlider.Value / 100;
                 decimal total = bill + tip;
                 total = Math.Floor(total);
-                totalLabel.Text = $"{total.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
+                totalLabel.Text = $"{total.ToString("C", currentCulture)}";
             }
         }
 
@@ -84,8 +95,31 @@ namespace MauiHello.Views
                 decimal tip = bill * (decimal)tipSlider.Value / 100;
                 decimal total = bill + tip;
                 total = Math.Ceiling(total);
-                totalLabel.Text = $"{total.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
+                totalLabel.Text = $"{total.ToString("C", currentCulture)}";
             }
+        }
+
+        private async void OnCurrencyClicked(object sender, EventArgs e)
+        {
+            string action = await DisplayActionSheet("Vælg valuta", "Cancel", null, "Kroner (DK)", "Euro (EU)", "Dollars (US)");
+
+            switch (action)
+            {
+                case "Kroner (DK)":
+                    currentCulture = CultureInfo.CreateSpecificCulture("da-DK");
+                    break;
+                case "Euro (EU)":
+                    currentCulture = CultureInfo.CreateSpecificCulture("de-DE");
+                    break;
+                case "Dollars (US)":
+                    currentCulture = CultureInfo.CreateSpecificCulture("en-US");
+                    break;
+                default:
+                    return; // User cancelled
+            }
+
+            // Update display with new currency
+            UpdateTipAndTotal();
         }
 
         private void UpdateTipAndTotal()
@@ -94,8 +128,8 @@ namespace MauiHello.Views
             {
                 decimal tip = bill * (decimal)tipSlider.Value / 100;
                 decimal total = bill + tip;
-                tipLabel.Text = $"{tip.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
-                totalLabel.Text = $"{total.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
+                tipLabel.Text = $"{tip.ToString("C", currentCulture)}";
+                totalLabel.Text = $"{total.ToString("C", currentCulture)}";
             }
             else
             {

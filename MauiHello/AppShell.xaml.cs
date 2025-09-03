@@ -1,4 +1,6 @@
-﻿namespace MauiHello
+﻿using MauiHello.Views;
+
+namespace MauiHello
 {
     public partial class AppShell : Shell
     {
@@ -7,6 +9,7 @@
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(Views.NotePage), typeof(Views.NotePage));
+            Routing.RegisterRoute("DetailsPage", typeof(DetailsPage));
         }
     }
 }
