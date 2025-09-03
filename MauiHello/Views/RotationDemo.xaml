@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiHello.Views.RotationDemo"
+             Title="Rotation Demo">
+    
+    <Grid Padding="20" RowSpacing="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        
+
+        <!-- Slider (grader) -->
+        <Slider x:Name="rotationSlider"
+                Grid.Row="0"
+                Minimum="-360"
+                Maximum="360"
+                Value="45" />
+        
+        <Label Grid.Row="1"
+               Text="{Binding Source={x:Reference rotationSlider}, Path=Value, StringFormat='Angle = {0:F0}°'}"
+               FontSize="18"
+               HorizontalOptions="Center" />
+        
+        <Entry Grid.Row="2"
+               Text="{Binding Source={x:Reference rotationSlider}, Path=Value, StringFormat='{0:F0}', Mode=TwoWay}"
+               Placeholder="Indtast vinkel (-360 - 360)"
+               Keyboard="Numeric"
+               HorizontalOptions="Center"
+               WidthRequest="150" />
+        
+        <!-- Roteret label -->
+        <Label Grid.Row="4"
+               Text="{Binding Source={x:Reference rotationSlider}, Path=Value, StringFormat='Rotation Angle = {0:F0}°'}"
+               FontSize="16"
+               Rotation="{Binding Source={x:Reference rotationSlider}, Path=Value}"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+        
+    </Grid>
+</ContentPage>

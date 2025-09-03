@@ -1,79 +1,68 @@
 using Microsoft.Maui.Controls;
-using System.Text.Json;
 using MauiHello.Models;
 
 namespace MauiHello.Views
 {
-    [QueryProperty(nameof(UserName), "name")]
-    [QueryProperty(nameof(PersonData), "person")]
+    [QueryProperty(nameof(Name), "name")]
+    [QueryProperty(nameof(Address), "address")]
+    [QueryProperty(nameof(Age), "age")]
     public partial class DetailsPage : ContentPage
     {
-        private string _userName = string.Empty;
-        private string _personData = string.Empty;
+        private string _name = string.Empty;
+        private string _address = string.Empty;
+        private string _age = string.Empty;
 
-        public string UserName
+        public string Name
         {
-            get => _userName;
+            get => _name;
             set
             {
-                _userName = value;
-                UpdateWelcomeMessage();
+                _name = value;
+                UpdateDisplay();
             }
         }
 
-        public string PersonData
+        public string Address
         {
-            get => _personData;
+            get => _address;
             set
             {
-                _personData = value;
-                UpdatePersonInformation();
+                _address = value;
+                UpdateDisplay();
             }
         }
 
-        public bool HasPersonData { get; private set; }
+        public string Age
+        {
+            get => _age;
+            set
+            {
+                _age = value;
+                UpdateDisplay();
+            }
+        }
 
         public DetailsPage()
         {
             InitializeComponent();
-            BindingContext = this;
         }
 
-        private void UpdateWelcomeMessage()
+        private void UpdateDisplay()
         {
-            if (!string.IsNullOrEmpty(UserName))
+            if (!string.IsNullOrEmpty(Name))
             {
-                welcomeLabel.Text = $"Welcome, {UserName}!";
+                welcomeLabel.Text = $"Welcome, {Name}!";
+                nameLabel.Text = $"Name: {Name}";
             }
-        }
 
-        private void UpdatePersonInformation()
-        {
-            if (!string.IsNullOrEmpty(PersonData))
+            if (!string.IsNullOrEmpty(Address))
             {
-                try
-                {
-                    var person = JsonSerializer.Deserialize<Person>(PersonData);
-                    if (person != null)
-                    {
-                        nameLabel.Text = $"Name: {person.Name}";
-                        addressLabel.Text = $"Address: {person.Address}";
-                        ageLabel.Text = $"Age: {person.Age}";
-                        HasPersonData = true;
-                        OnPropertyChanged(nameof(HasPersonData));
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Handle JSON parsing error
-                    HasPersonData = false;
-                    OnPropertyChanged(nameof(HasPersonData));
-                }
+                addressLabel.Text = $"Address: {Address}";
             }
-            else
+
+            if (!string.IsNullOrEmpty(Age))
             {
-                HasPersonData = false;
-                OnPropertyChanged(nameof(HasPersonData));
+                ageLabel.Text = $"Age: {Age}";
             }
         }
 

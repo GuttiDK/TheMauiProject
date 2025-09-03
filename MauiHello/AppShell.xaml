@@ -53,6 +53,10 @@
                 Title="Test Page"
                 ContentTemplate="{DataTemplate views:TestPage}"
                 Icon="vial.png" />
+            <ShellContent
+                Title="View to View"
+                ContentTemplate="{DataTemplate views:RotationDemo}"
+                Icon="file.png" />
         </Tab>
     </FlyoutItem>
 
