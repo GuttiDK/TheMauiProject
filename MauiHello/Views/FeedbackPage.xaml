@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiHello.Views.FeedbackPage"
+             Title="Feedback"
+             NavigationPage.HasBackButton="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20">
+            <Label Text="We value your feedback!" FontSize="24" HorizontalOptions="Center" />
+            
+            <Editor x:Name="feedbackEditor"
+                    Placeholder="Write your feedback here..."
+                    AutoSize="TextChanges"
+                    MaxLength="500"
+                    HeightRequest="120"
+                    />
+
+            <Label Text="Rate your experience:" FontSize="18" />
+            <Slider x:Name="ratingSlider"
+                    Minimum="1"
+                    Maximum="5"
+                    Value="3"
+                    />
+
+            <Label x:Name="ratingLabel"
+                   Text="Rating: 3"
+                   FontSize="16"
+                   HorizontalOptions="Center" />
+
+            <!-- Person Information Section -->
+            <Frame BackgroundColor="LightGray" Padding="15" CornerRadius="10">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Person Information" FontSize="18" FontAttributes="Bold" />
+                    
+                    <Label Text="Name:" />
+                    <Entry x:Name="nameEntry"
+                           Placeholder="Enter your name"
+                           Text="Christian" />
+                    
+                    <Label Text="Address:" />
+                    <Entry x:Name="addressEntry"
+                           Placeholder="Enter your address"
+                           Text="Copenhagen, Denmark" />
+                    
+                    <Label Text="Age:" />
+                    <Entry x:Name="ageEntry"
+                           Placeholder="Enter your age"
+                           Text="25"
+                           Keyboard="Numeric" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Text="Submit"
+                    Clicked="OnSubmitClicked"
+                    CornerRadius="10"
+                    FontAttributes="Bold"
+                    />
+
+            <Button Text="Go to Details (Simple)"
+                    Clicked="OnGoToDetailsSimpleClicked"
+                    CornerRadius="10"
+                    FontAttributes="Bold"
+                    BackgroundColor="Green"
+                    TextColor="White" />
+
+            <Button Text="Go to Details (With Person)"
+                    Clicked="OnGoToDetailsWithPersonClicked"
+                    CornerRadius="10"
+                    FontAttributes="Bold"
+                    BackgroundColor="Orange"
+                    TextColor="White" />
+
+            <Button Text="Back"
+                    Clicked="OnBackClicked"
+                    CornerRadius="10"
+                    FontAttributes="Bold"
+                    />
+
+            <Label x:Name="confirmationLabel"
+                   Text=""
+                   TextColor="Green"
+                   FontSize="16"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

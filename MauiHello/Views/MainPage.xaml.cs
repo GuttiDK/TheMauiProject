@@ -1,23 +1,35 @@
-﻿namespace MauiHello.Views;
+﻿using Microsoft.Maui.Controls;
 
-public partial class MainPage : ContentPage
+namespace MauiHello.Views
 {
-    int count = 0;
-
-    public MainPage()
+    public partial class MainPage : ContentPage
     {
-        InitializeComponent();
-    }
+        int count = 0;
+        public MainPage()
+        {
+            InitializeComponent();
+        }
 
-    private void OnCounterClicked(object? sender, EventArgs e)
-    {
-        count++;
+        private async void AboutToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AboutPage(), true); // animated navigation
+        }
 
-        if (count == 1)
-            CounterBtn.Text = $"Clicked {count} time";
-        else
-            CounterBtn.Text = $"Clicked {count} times";
+        private async void FeedbackToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new FeedbackPage(), true); // animated modal navigation
+        }
 
-        SemanticScreenReader.Announce(CounterBtn.Text);
+        private void OnCounterClicked(object? sender, EventArgs e)
+        {
+            count++;
+
+            if (count == 1)
+                CounterBtn.Text = $"Clicked {count} time";
+            else
+                CounterBtn.Text = $"Clicked {count} times";
+
+            SemanticScreenReader.Announce(CounterBtn.Text);
+        }
     }
 }

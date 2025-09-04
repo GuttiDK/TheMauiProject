@@ -1,81 +1,68 @@
-using Microsoft.Maui;
+using System;
+using Microsoft.Maui.Controls;
 using System.Globalization;
+using MauiHello.Models;
 
-namespace MauiHello.Views;
-
-public partial class TipCalculator : ContentPage
+namespace MauiHello.Views
 {
-    public TipCalculator()
+    public partial class TipCalculator : ContentPage
     {
-        InitializeComponent();
-        CalculateTip(); // Initial beregning
-    }
+        public Tip TipModel { get; private set; }
 
-    private void OnSliderChanged(object sender, ValueChangedEventArgs e)
-    {
-        percentageLabel.Text = $"{(int)tipSlider.Value}%";
-        CalculateTip();
-    }
-
-    private void OnBillOrTipChanged(object sender, TextChangedEventArgs e)
-    {
-        CalculateTip();
-    }
-
-    private void OnFifteenPercentClicked(object sender, EventArgs e)
-    {
-        tipSlider.Value = 15;
-    }
-
-    private void OnTwentyPercentClicked(object sender, EventArgs e)
-    {
-        tipSlider.Value = 20;
-    }
-
-    private void OnRoundDownClicked(object sender, EventArgs e)
-    {
-        if (!double.TryParse(billEntry.Text, out double billAmount)) return;
-
-        double tipPercent = tipSlider.Value / 100;
-        double tip = billAmount * tipPercent;
-        double total = billAmount + tip;
-
-        double roundedTotal = Math.Floor(total / 10) * 10;
-        double newTip = roundedTotal - billAmount;
-
-        tipLabel.Text = $"Tip: {newTip.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
-        totalLabel.Text = $"Total: {roundedTotal.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
-    }
-
-    private void OnRoundUpClicked(object sender, EventArgs e)
-    {
-        if (!double.TryParse(billEntry.Text, out double billAmount)) return;
-
-        double tipPercent = tipSlider.Value / 100;
-        double tip = billAmount * tipPercent;
-        double total = billAmount + tip;
-
-        double roundedTotal = Math.Ceiling(total / 10) * 10;
-        double newTip = roundedTotal - billAmount;
-
-        tipLabel.Text = $"Tip: {newTip.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
-        totalLabel.Text = $"Total: {roundedTotal.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
-    }
-
-    private void CalculateTip()
-    {
-        if (!double.TryParse(billEntry.Text, out double billAmount))
+        public TipCalculator()
         {
-            tipLabel.Text = "Tip: ";
-            totalLabel.Text = "Total: ";
-            return;
+            InitializeComponent();
+            TipModel = new Tip();
+            BindingContext = TipModel;
         }
 
-        double tipPercent = tipSlider.Value / 100;
-        double tip = billAmount * tipPercent;
-        double total = billAmount + tip;
+        private async void OnFifteenPercentClicked(object sender, EventArgs e)
+        {
+            // Show alert for normal tip
+            await DisplayAlert("Normal Tip", "Du har valgt normal tip på 15%", "OK");
+            TipModel.TipPct = 15;
+        }
 
-        tipLabel.Text = $"Tip: {tip.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
-        totalLabel.Text = $"Total: {total.ToString("C", CultureInfo.CreateSpecificCulture("da-DK"))}";
+        private async void OnTwentyPercentClicked(object sender, EventArgs e)
+        {
+            // Ask user if they want to give generous tip
+            bool answer = await DisplayAlert("Generøs Tip", "Vil du give en generøs tip på 20%?", "Yes", "No");
+            
+            // Only set to 20% if user answered Yes
+            if (answer)
+            {
+                TipModel.TipPct = 20;
+            }
+        }
+
+        private void OnRoundDownClicked(object sender, EventArgs e)
+        {
+            TipModel.RoundDown();
+        }
+
+        private void OnRoundUpClicked(object sender, EventArgs e)
+        {
+            TipModel.RoundUp();
+        }
+
+        private async void OnCurrencyClicked(object sender, EventArgs e)
+        {
+            string action = await DisplayActionSheet("Vælg valuta", "Cancel", null, "Kroner (DK)", "Euro (EU)", "Dollars (US)");
+
+            switch (action)
+            {
+                case "Kroner (DK)":
+                    TipModel.CurrentCulture = CultureInfo.CreateSpecificCulture("da-DK");
+                    break;
+                case "Euro (EU)":
+                    TipModel.CurrentCulture = CultureInfo.CreateSpecificCulture("de-DE");
+                    break;
+                case "Dollars (US)":
+                    TipModel.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+                    break;
+                default:
+                    return; // User cancelled
+            }
+        }
     }
 }

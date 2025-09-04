@@ -1,35 +1,131 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MauiHello.Models"
              x:Class="MauiHello.Views.TipCalculator"
-             Title="TipCalculator">
-    <ScrollView>
-        <VerticalStackLayout Padding="5" Spacing="5">
+             x:DataType="models:Tip"
+             Title="Home">
 
-            <Label Text="Bill" FontAttributes="Bold" FontSize="20" />
-            <Entry x:Name="billEntry"
+    <Grid RowDefinitions="Auto,*,Auto,Auto"
+          Padding="0">
+
+        <!-- Bill/Tip/Total area -->
+        <Grid Grid.Row="0"
+              Padding="40,30,40,0"
+              ColumnSpacing="10"
+              RowSpacing="10"
+              RowDefinitions="Auto,Auto,Auto"
+              ColumnDefinitions="*,*">
+            <Label Text="Bill"
+                   VerticalOptions="Center"
+                   FontSize="16"
+                   Grid.Row="0"
+                   Grid.Column="0" />
+            <Entry Text="{Binding BillAmount}"
                    Placeholder="Enter Amount"
                    Keyboard="Numeric"
-                   TextChanged="OnBillOrTipChanged" />
+                   FontSize="16"
+                   Grid.Row="0"
+                   Grid.Column="1" />
 
-            <Label x:Name="tipLabel" Text="Tip" FontSize="18"/>
-            <Label x:Name="totalLabel" Text="Total" FontSize="18" FontAttributes="Bold" />
+            <Label Text="Tip"
+                   VerticalOptions="Center"
+                   FontSize="16"
+                   Grid.Row="1"
+                   Grid.Column="0" />
+            <Label Text="{Binding TipAmount}"
+                   VerticalOptions="Center"
+                   FontSize="16"
+                   Grid.Row="1"
+                   Grid.Column="1" />
 
-            <Label Text="Tip Percentage" FontSize="18" />
-            <Slider x:Name="tipSlider"
-                    Minimum="0"
+            <Label Text="Total"
+                   VerticalOptions="Center"
+                   FontSize="16"
+                   Grid.Row="2"
+                   Grid.Column="0" />
+            <Label Text="{Binding TotalAmount}"
+                   VerticalOptions="Center"
+                   FontSize="16"
+                   Grid.Row="2"
+                   Grid.Column="1" />
+        </Grid>
+
+        <!-- Tip controls at bottom -->
+        <Grid Grid.Row="2"
+              Padding="30,0,30,0"
+              RowDefinitions="Auto,Auto,Auto"
+              ColumnDefinitions="*,*"
+              VerticalOptions="End">
+
+            <!-- Tip Percentage row -->
+            <Label Text="Tip Percentage"
+                   FontSize="16"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   VerticalOptions="Center" />
+            <Label Text="{Binding TipPctDisplay}"
+                   FontSize="16"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   Grid.Row="0"
+                   Grid.Column="1" />
+
+            <!-- Slider row -->
+            <Slider Minimum="0"
                     Maximum="100"
-                    Value="15"
-                    ValueChanged="OnSliderChanged" />
+                    Value="{Binding TipPct}"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,5,0,15" />
 
-            <Label x:Name="percentageLabel" Text="15%" FontSize="16"/>
+            <!-- Buttons row -->
+            <Grid Grid.Row="2"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  RowDefinitions="Auto,Auto,Auto"
+                  ColumnDefinitions="*,*"
+                  ColumnSpacing="15"
+                  RowSpacing="10"
+                  HorizontalOptions="Center">
 
-            <Button Text="15%" Clicked="OnFifteenPercentClicked" />
-            <Button Text="20%" Clicked="OnTwentyPercentClicked" />
-            <Button Text="Round Down" Clicked="OnRoundDownClicked" />
-            <Button Text="Round Up" Clicked="OnRoundUpClicked" />
+                <Button Text="15%"
+                        WidthRequest="150"
+                        CornerRadius="10"
+                        Clicked="OnFifteenPercentClicked"
+                        Grid.Row="0"
+                        Grid.Column="0" />
 
-        </VerticalStackLayout>
-    </ScrollView>
+                <Button Text="20%"
+                        WidthRequest="150"
+                        CornerRadius="10"
+                        Clicked="OnTwentyPercentClicked"
+                        Grid.Row="0"
+                        Grid.Column="1" />
 
+                <Button Text="Round Down"
+                        WidthRequest="150"
+                        CornerRadius="10"
+                        Clicked="OnRoundDownClicked"
+                        Grid.Row="1"
+                        Grid.Column="0" />
+
+                <Button Text="Round Up"
+                        WidthRequest="150"
+                        CornerRadius="10"
+                        Clicked="OnRoundUpClicked"
+                        Grid.Row="1"
+                        Grid.Column="1" />
+
+                <Button Text="Currency"
+                        WidthRequest="150"
+                        CornerRadius="10"
+                        Clicked="OnCurrencyClicked"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2" />
+            </Grid>
+        </Grid>
+    </Grid>
 </ContentPage>

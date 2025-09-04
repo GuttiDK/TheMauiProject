@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiHello.Views.DetailsPage"
+             Title="Details"
+             NavigationPage.HasBackButton="False">
+    <VerticalStackLayout Padding="30" Spacing="20">
+        <Label Text="Details Page" 
+               FontSize="28" 
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+        
+        <Label x:Name="welcomeLabel"
+               Text="Welcome!"
+               FontSize="20"
+               HorizontalOptions="Center"
+               TextColor="Blue" />
+        
+        <Frame BackgroundColor="LightGray" 
+               Padding="15" 
+               CornerRadius="10"
+               IsVisible="{Binding HasPersonData}">
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Person Information:" 
+                       FontSize="18" 
+                       FontAttributes="Bold" />
+                
+                <Label x:Name="nameLabel"
+                       Text=""
+                       FontSize="16" />
+                
+                <Label x:Name="addressLabel"
+                       Text=""
+                       FontSize="16" />
+                
+                <Label x:Name="ageLabel"
+                       Text=""
+                       FontSize="16" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <Button Text="Go Back"
+                Clicked="OnGoBackClicked"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                BackgroundColor="DarkBlue"
+                TextColor="White" />
+    </VerticalStackLayout>
+</ContentPage>

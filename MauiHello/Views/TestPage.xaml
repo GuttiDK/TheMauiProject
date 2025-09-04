@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiHello.Views.TestPage"
+             Title="TestPage">
+    <VerticalStackLayout BindingContext="{Reference rotationSlider}">
+        <Slider x:Name="rotationSlider"
+                Minimum="-360"
+                Maximum="360"
+                Value="45"
+                ></Slider>
+
+        <Label Text="{Binding Value , StringFormat='The slider value is: {0:F0}'}">
+        </Label>
+
+        <Entry Text="{Binding Value, StringFormat='{0:F0}'}"
+               Placeholder="Indtast vinkel"
+               Keyboard="Numeric"
+               HorizontalOptions="Center"
+               WidthRequest="150">
+        </Entry>
+
+        <Label Text="{Binding Value, StringFormat='Rotation Angle = {0:F0}°'}"
+               FontSize="16"
+               Rotation="{Binding Value}"
+               HorizontalOptions="Center"
+               VerticalOptions="Center">
+        </Label>
+    </VerticalStackLayout>
+</ContentPage>

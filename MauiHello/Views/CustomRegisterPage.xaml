@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiHello.Views.CustomRegisterPage"
+             Title="CustomRegisterPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20">
+
+            <!-- 1. Udskift robot-billedet -->
+            <Image Source="dotnet_bot.png"
+                   HeightRequest="120"
+                   WidthRequest="120"
+                   HorizontalOptions="Center" />
+
+            <!-- 2. UserID -->
+            <Label Text="UserID" />
+            <Entry x:Name="userIdEntry"
+                   Placeholder="Enter your email address"
+                   BackgroundColor="LightGray"
+                   Keyboard="Email"
+                   ClearButtonVisibility="WhileEditing" />
+
+            <!-- Password -->
+            <Label Text="Password" />
+            <Entry x:Name="passwordEntry"
+                   Placeholder="Enter password"
+                   IsPassword="True"
+                   MaxLength="10"
+                   ReturnType="Done" />
+
+            <!-- 3. Motivation -->
+            <Label Text="Why do you want to register?" />
+            <Editor x:Name="motivationEditor"
+                    Placeholder="Write your motivation here..."
+                    IsSpellCheckEnabled="True"
+                    MaxLength="200"
+                    AutoSize="TextChanges" />
+
+            <!-- 4. Date and Time Picker -->
+            <Label Text="Select a date:" />
+            <DatePicker x:Name="datePicker" />
+
+            <Label Text="Select a time:" />
+            <TimePicker x:Name="timePicker" />
+
+            <!-- Register Button -->
+            <Button Text="Register" Clicked="OnRegisterClicked" />
+
+            <Label x:Name="messageLabel" TextColor="Red" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
