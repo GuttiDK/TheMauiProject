@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MauiHello.Models"
              x:Class="MauiHello.Views.TipCalculator"
+             x:DataType="models:Tip"
              Title="Home">
 
     <Grid RowDefinitions="Auto,*,Auto,Auto"
@@ -19,10 +21,9 @@
                    FontSize="16"
                    Grid.Row="0"
                    Grid.Column="0" />
-            <Entry x:Name="billEntry"
+            <Entry Text="{Binding BillAmount}"
                    Placeholder="Enter Amount"
                    Keyboard="Numeric"
-                   TextChanged="OnBillOrTipChanged"
                    FontSize="16"
                    Grid.Row="0"
                    Grid.Column="1" />
@@ -32,8 +33,7 @@
                    FontSize="16"
                    Grid.Row="1"
                    Grid.Column="0" />
-            <Label x:Name="tipLabel"
-                   Text="0.00"
+            <Label Text="{Binding TipAmount}"
                    VerticalOptions="Center"
                    FontSize="16"
                    Grid.Row="1"
@@ -44,8 +44,7 @@
                    FontSize="16"
                    Grid.Row="2"
                    Grid.Column="0" />
-            <Label x:Name="totalLabel"
-                   Text="0.00"
+            <Label Text="{Binding TotalAmount}"
                    VerticalOptions="Center"
                    FontSize="16"
                    Grid.Row="2"
@@ -65,20 +64,17 @@
                    Grid.Row="0"
                    Grid.Column="0"
                    VerticalOptions="Center" />
-            <Label x:Name="percentageLabel"
+            <Label Text="{Binding TipPctDisplay}"
                    FontSize="16"
-                   Text="15%"
                    HorizontalOptions="End"
                    VerticalOptions="Center"
                    Grid.Row="0"
                    Grid.Column="1" />
 
             <!-- Slider row -->
-            <Slider x:Name="tipSlider"
-                    Minimum="0"
+            <Slider Minimum="0"
                     Maximum="100"
-                    Value="15"
-                    ValueChanged="OnSliderChanged"
+                    Value="{Binding TipPct}"
                     Grid.Row="1"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
