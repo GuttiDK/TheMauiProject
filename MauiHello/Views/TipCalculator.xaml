@@ -2,9 +2,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:MauiHello.Models"
+             xmlns:converters="clr-namespace:MauiHello.Converters"
              x:Class="MauiHello.Views.TipCalculator"
              x:DataType="models:Tip"
-             Title="Home">
+             Title="Tip Kalkulator">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PercentageConverter x:Key="PercentageConverter" />
+            <converters:PositiveAmountConverter x:Key="PositiveAmountConverter" />
+            <converters:CurrencyColorConverter x:Key="CurrencyColorConverter" />
+            <converters:SliderValueConverter x:Key="SliderValueConverter" />
+            <converters:BillAmountValidator x:Key="BillAmountValidator" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto,*,Auto,Auto"
           Padding="0">
@@ -13,16 +24,18 @@
         <Grid Grid.Row="0"
               Padding="40,30,40,0"
               ColumnSpacing="10"
-              RowSpacing="10"
+              RowSpacing="15"
               RowDefinitions="Auto,Auto,Auto"
               ColumnDefinitions="*,*">
-            <Label Text="Bill"
+            
+            <Label Text="Regning"
                    VerticalOptions="Center"
                    FontSize="16"
+                   FontAttributes="Bold"
                    Grid.Row="0"
                    Grid.Column="0" />
-            <Entry Text="{Binding BillAmount}"
-                   Placeholder="Enter Amount"
+            <Entry Text="{Binding BillAmount, Converter={StaticResource BillAmountValidator}}"
+                   Placeholder="Indtast beløb"
                    Keyboard="Numeric"
                    FontSize="16"
                    Grid.Row="0"
@@ -31,22 +44,28 @@
             <Label Text="Tip"
                    VerticalOptions="Center"
                    FontSize="16"
+                   FontAttributes="Bold"
                    Grid.Row="1"
                    Grid.Column="0" />
             <Label Text="{Binding TipAmount}"
+                   TextColor="{Binding TipAmount, Converter={StaticResource CurrencyColorConverter}}"
                    VerticalOptions="Center"
                    FontSize="16"
+                   FontAttributes="Bold"
                    Grid.Row="1"
                    Grid.Column="1" />
 
             <Label Text="Total"
                    VerticalOptions="Center"
-                   FontSize="16"
+                   FontSize="18"
+                   FontAttributes="Bold"
                    Grid.Row="2"
                    Grid.Column="0" />
             <Label Text="{Binding TotalAmount}"
+                   TextColor="{Binding TotalAmount, Converter={StaticResource CurrencyColorConverter}}"
                    VerticalOptions="Center"
-                   FontSize="16"
+                   FontSize="18"
+                   FontAttributes="Bold"
                    Grid.Row="2"
                    Grid.Column="1" />
         </Grid>
@@ -54,34 +73,49 @@
         <!-- Tip controls at bottom -->
         <Grid Grid.Row="2"
               Padding="30,0,30,0"
-              RowDefinitions="Auto,Auto,Auto"
+              RowDefinitions="Auto,Auto,Auto,Auto"
               ColumnDefinitions="*,*"
               VerticalOptions="End">
 
             <!-- Tip Percentage row -->
-            <Label Text="Tip Percentage"
+            <Label Text="Tip Procent"
                    FontSize="16"
+                   FontAttributes="Bold"
                    Grid.Row="0"
                    Grid.Column="0"
                    VerticalOptions="Center" />
-            <Label Text="{Binding TipPctDisplay}"
-                   FontSize="16"
+            <Label Text="{Binding TipPct, Converter={StaticResource PercentageConverter}, ConverterParameter=1}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="Blue"
                    HorizontalOptions="End"
                    VerticalOptions="Center"
                    Grid.Row="0"
                    Grid.Column="1" />
 
-            <!-- Slider row -->
+            <!-- Slider row with value display -->
+            <Label Text="{Binding TipPct, Converter={StaticResource SliderValueConverter}}"
+                   FontSize="14"
+                   TextColor="Gray"
+                   HorizontalOptions="Center"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   Margin="0,5,0,0" />
+            
             <Slider Minimum="0"
-                    Maximum="100"
+                    Maximum="50"
                     Value="{Binding TipPct}"
-                    Grid.Row="1"
+                    Grid.Row="2"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Margin="0,5,0,15" />
+                    Margin="0,5,0,15"
+                    ThumbColor="Blue"
+                    MinimumTrackColor="LightBlue"
+                    MaximumTrackColor="LightGray" />
 
             <!-- Buttons row -->
-            <Grid Grid.Row="2"
+            <Grid Grid.Row="3"
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
                   RowDefinitions="Auto,Auto,Auto"
@@ -93,6 +127,8 @@
                 <Button Text="15%"
                         WidthRequest="150"
                         CornerRadius="10"
+                        BackgroundColor="LightBlue"
+                        TextColor="DarkBlue"
                         Clicked="OnFifteenPercentClicked"
                         Grid.Row="0"
                         Grid.Column="0" />
@@ -100,27 +136,35 @@
                 <Button Text="20%"
                         WidthRequest="150"
                         CornerRadius="10"
+                        BackgroundColor="LightGreen"
+                        TextColor="DarkGreen"
                         Clicked="OnTwentyPercentClicked"
                         Grid.Row="0"
                         Grid.Column="1" />
 
-                <Button Text="Round Down"
+                <Button Text="Rund Ned"
                         WidthRequest="150"
                         CornerRadius="10"
+                        BackgroundColor="LightCoral"
+                        TextColor="DarkRed"
                         Clicked="OnRoundDownClicked"
                         Grid.Row="1"
                         Grid.Column="0" />
 
-                <Button Text="Round Up"
+                <Button Text="Rund Op"
                         WidthRequest="150"
                         CornerRadius="10"
+                        BackgroundColor="LightGoldenrodYellow"
+                        TextColor="DarkGoldenrod"
                         Clicked="OnRoundUpClicked"
                         Grid.Row="1"
                         Grid.Column="1" />
 
-                <Button Text="Currency"
+                <Button Text="Valuta"
                         WidthRequest="150"
                         CornerRadius="10"
+                        BackgroundColor="Lavender"
+                        TextColor="Purple"
                         Clicked="OnCurrencyClicked"
                         Grid.Row="2"
                         Grid.Column="0"
