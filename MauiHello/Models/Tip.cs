@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using MauiHello.Services;
 
 namespace MauiHello.Models
 {
@@ -10,8 +11,14 @@ namespace MauiHello.Models
         private string _billAmount = "0,00";
         private string _tipAmount = "0,00";
         private string _totalAmount = "0,00";
-        private double _tipPct = 15.0;
+        private double _tipPct;
         private CultureInfo _currentCulture = CultureInfo.CreateSpecificCulture("da-DK");
+
+        public Tip()
+        {
+            // Load the default tip percentage from settings
+            _tipPct = SettingsService.GetDefaultTipPercent();
+        }
 
         public string BillAmount
         {
