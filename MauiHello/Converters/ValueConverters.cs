@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace MauiHello.App.Converters
+namespace MauiHello.Converters
 {
     /// <summary>
     /// Konverterer et tal til en procentværdi med % tegn
