@@ -179,4 +179,36 @@ namespace MauiHello.Converters
             return "0,00";
         }
     }
+
+    /// <summary>
+    /// Generisk converter der kan konvertere boolean værdier til enhver objekttype
+    /// Bruges til at vælge mellem to forskellige objekter baseret på en boolean værdi
+    /// </summary>
+    /// <typeparam name="T">Typen af objekter der skal vælges mellem</typeparam>
+    public class BoolToObjectConverter<T> : IValueConverter
+    {
+        /// <summary>
+        /// Objektet der returneres når værdien er true
+        /// </summary>
+        public T TrueObject { get; set; }
+
+        /// <summary>
+        /// Objektet der returneres når værdien er false
+        /// </summary>
+        public T FalseObject { get; set; }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is bool boolValue)
+            {
+                return boolValue ? TrueObject : FalseObject;
+            }
+            return FalseObject;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException("BoolToObjectConverter does not support ConvertBack");
+        }
+    }
 }

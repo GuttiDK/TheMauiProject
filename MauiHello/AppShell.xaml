@@ -39,6 +39,11 @@
                 Title="Register"
                 ContentTemplate="{DataTemplate views:CustomRegisterPage}"
                 Icon="user.png" />
+
+            <ShellContent
+                Title="Switch Demo"
+                ContentTemplate="{DataTemplate views:SwitchDemoPage}"
+                Icon="toggle.png" />
         </Tab>
     </FlyoutItem>
 
