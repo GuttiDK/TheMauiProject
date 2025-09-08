@@ -1,0 +1,146 @@
+[
+  {
+    "Name": "Baboon",
+    "Location": "Africa & Arabia",
+    "Details": "Baboons are African and Arabian Old World monkeys belonging to the genus Papio, part of the subfamily Cercopithecinae.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/baboon.jpg",
+    "Population": 10000,
+    "Latitude": -8.783195,
+    "Longitude": 34.508523
+  },
+  {
+    "Name": "Capuchin Monkey",
+    "Location": "Central & South America",
+    "Details": "The capuchin monkeys are New World monkeys of the subfamily Cebinae. Prior to 2011, the subfamily contained only a single genus, Cebus.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/capuchin.jpg",
+    "Population": 23000,
+    "Latitude": -6.314993,
+    "Longitude": -35.919373
+  },
+  {
+    "Name": "Blue Monkey",
+    "Location": "Central and East Africa",
+    "Details": "The blue monkey or diademed monkey is a species of Old World monkey native to Central and East Africa, ranging from the upper Congo River basin east to the East African Rift and south to northern Angola and Zambia",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/bluemonkey.jpg",
+    "Population": 200000,
+    "Latitude": -8.783195,
+    "Longitude": 34.508523
+  },
+  {
+    "Name": "Squirrel Monkey",
+    "Location": "Central & South America",
+    "Details": "The squirrel monkeys are the New World monkeys of the genus Saimiri. They are the only genus in the subfamily Saimirinae.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/squirrelmonkey.jpg",
+    "Population": 500000,
+    "Latitude": -2.854606,
+    "Longitude": -59.867369
+  },
+  {
+    "Name": "Golden Lion Tamarin",
+    "Location": "Brazil",
+    "Details": "The golden lion tamarin also known as the golden marmoset, is a small New World monkey of the family Callitrichidae.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/goldenlion.jpg",
+    "Population": 3000,
+    "Latitude": -22.9068467,
+    "Longitude": -42.6286639
+  },
+  {
+    "Name": "Howler Monkey",
+    "Location": "South America",
+    "Details": "Howler monkeys are among the largest of the New World monkeys. Fifteen species are currently recognised. Previously classified in the family Cebidae, they are now placed in the family Atelidae.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/howler.jpg",
+    "Population": 15000,
+    "Latitude": -12.32746,
+    "Longitude": -60.67263
+  },
+  {
+    "Name": "Japanese Macaque",
+    "Location": "Japan",
+    "Details": "The Japanese macaque, is a terrestrial Old World monkey species that is native to Japan. They are also sometimes known as the snow monkey because they live in areas where snow covers the ground for months each",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/japanesemacaque.jpg",
+    "Population": 100000,
+    "Latitude": 35.6762,
+    "Longitude": 139.6503
+  },
+  {
+    "Name": "Mandrill",
+    "Location": "Southern Cameroon, Equatorial Guinea, Gabon, and the Republic of the Congo",
+    "Details": "The mandrill is a primate of the Old World monkey family, closely related to the baboons and even more closely to the drill. It is found in southern Cameroon, Equatorial Guinea, Gabon, and the Republic of the Congo.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/mandrill.jpg",
+    "Population": 17000,
+    "Latitude": -0.71946,
+    "Longitude": 11.60677
+  },
+  {
+    "Name": "Proboscis Monkey",
+    "Location": "Borneo",
+    "Details": "The proboscis monkey or long-nosed monkey, known as the bekantan in Malay, is a reddish-brown arboreal Old World monkey that is endemic to the southeast Asian island of Borneo.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/proboscis.jpg",
+    "Population": 7000,
+    "Latitude": 0.50453,
+    "Longitude": 114.22754
+  },
+  {
+    "Name": "Red Shanked Douc",
+    "Location": "Vietnam, Laos",
+    "Details": "The red-shanked douc is a species of Old World monkey, among the most colourful of all primates. This monkey is sometimes called the \"costumed ape\" for its extravagant appearance.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/redshanked.jpg",
+    "Population": 900,
+    "Latitude": 16.47509,
+    "Longitude": 107.19860
+  },
+  {
+    "Name": "Gray-shanked Douc",
+    "Location": "Vietnam",
+    "Details": "The gray-shanked douc langur is a douc species native to the Vietnamese provinces of Quang Nam, Quang Ngai, Binh Dinh, Kon Tum, and Gia Lai. The total population is estimated at 550 to 700 individuals.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/grayshanked.jpg",
+    "Population": 700,
+    "Latitude": 15.190498,
+    "Longitude": 108.319618
+  },
+  {
+    "Name": "Gelada",
+    "Location": "Ethiopia",
+    "Details": "The gelada, sometimes called the bleeding-heart monkey or the gelada baboon, is a species of Old World monkey found only in the Ethiopian Highlands, with large populations in the Semien Mountains.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/gelada.jpg",
+    "Population": 200000,
+    "Latitude": 12.500447,
+    "Longitude": 37.533691
+  },
+  {
+    "Name": "Vervet Monkey",
+    "Location": "Southern and East Africa",
+    "Details": "The vervet monkey, or simply vervet, is an Old World monkey of the family Cercopithecidae native to Africa. The term \"vervet\" is also used to refer to all the members of the genus Chlorocebus.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/vervet.jpg",
+    "Population": 500000,
+    "Latitude": -8.783195,
+    "Longitude": 34.508523
+  },
+  {
+    "Name": "Spider Monkey",
+    "Location": "Central and South America",
+    "Details": "Spider monkeys are New World monkeys belonging to the genus Ateles, part of the subfamily Atelinae, family Atelidae. Like other atelines, they are found in tropical forests of Central and South America, from southern Mexico to Brazil.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/spidermonkey.jpg",
+    "Population": 10000,
+    "Latitude": -2.854606,
+    "Longitude": -59.867369
+  },
+  {
+    "Name": "White-Headed Capuchin",
+    "Location": "Central America",
+    "Details": "The white-headed capuchin, also known as the white-faced capuchin or white-throated capuchin, is a medium-sized New World monkey of the family Cebidae, subfamily Cebinae.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/whiteheaded.jpg",
+    "Population": 15000,
+    "Latitude": 10.314724,
+    "Longitude": -85.605165
+  },
+  {
+    "Name": "Woolly Monkey",
+    "Location": "South America",
+    "Details": "The woolly monkeys are the genus Lagothrix of New World monkeys, usually placed in the family Atelidae.",
+    "Image": "https://raw.githubusercontent.com/jamesmontemagno/app-monkeys/master/woolly.jpg",
+    "Population": 25000,
+    "Latitude": -12.32746,
+    "Longitude": -60.67263
+  }
+]

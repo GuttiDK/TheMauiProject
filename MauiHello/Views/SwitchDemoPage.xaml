@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiHello.Views.SwitchDemoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:MauiHello.Converters"
+    Title="Switch Demo med Value Converters">
+
+    <!--  https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/data-binding/converters?view=net-maui-8.0#binding-converter-properties  -->
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <Style TargetType="Switch">
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Padding="20,10" Spacing="30">
+
+            <!-- Header -->
+            <Label 
+                Text="Switch Demo med Value Converters"
+                Style="{StaticResource Headline}"
+                HorizontalOptions="Center" />
+
+            <Label 
+                Text="Eksempler p� hvordan Switch controls kan bruges med Value Converters til dynamisk styling"
+                FontSize="14"
+                TextColor="Gray"
+                HorizontalTextAlignment="Center" />
+
+            <!-- Switch 1: Simpel tekst konvertering -->
+            <Frame BackgroundColor="LightBlue" Padding="15" CornerRadius="10">
+                <StackLayout>
+                    <Label Text="1. Simpel Tekst Konvertering" FontAttributes="Bold" FontSize="16" />
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="15">
+                        <Label Text="Subscribe?" />
+                        <Switch x:Name="switch1" />
+                        <Label>
+                            <Label.Text>
+                                <Binding Path="IsToggled" Source="{x:Reference switch1}">
+                                    <Binding.Converter>
+                                        <converters:BoolToObjectConverter
+                                            x:TypeArguments="x:String"
+                                            FalseObject="No way!"
+                                            TrueObject="Of course!" />
+                                    </Binding.Converter>
+                                </Binding>
+                            </Label.Text>
+                        </Label>
+                    </StackLayout>
+
+                    <Label 
+                        Text="Boolean ? String konvertering"
+                        FontSize="12"
+                        TextColor="DarkBlue"
+                        FontAttributes="Italic" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Switch 2: Tekst og farve konvertering -->
+            <Frame BackgroundColor="LightGreen" Padding="15" CornerRadius="10">
+                <StackLayout>
+                    <Label Text="2. Tekst OG Farve Konvertering" FontAttributes="Bold" FontSize="16" />
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="15">
+                        <Label Text="Allow popups?" />
+                        <Switch x:Name="switch2" />
+                        <Label>
+                            <Label.Text>
+                                <Binding Path="IsToggled" Source="{x:Reference switch2}">
+                                    <Binding.Converter>
+                                        <converters:BoolToObjectConverter
+                                            x:TypeArguments="x:String"
+                                            FalseObject="No"
+                                            TrueObject="Yes" />
+                                    </Binding.Converter>
+                                </Binding>
+                            </Label.Text>
+                            <Label.TextColor>
+                                <Binding Path="IsToggled" Source="{x:Reference switch2}">
+                                    <Binding.Converter>
+                                        <converters:BoolToObjectConverter
+                                            x:TypeArguments="Color"
+                                            FalseObject="Red"
+                                            TrueObject="Green" />
+                                    </Binding.Converter>
+                                </Binding>
+                            </Label.TextColor>
+                        </Label>
+                    </StackLayout>
+
+                    <Label 
+                        Text="To separate bindings: Boolean ? String OG Boolean ? Color"
+                        FontSize="12"
+                        TextColor="DarkGreen"
+                        FontAttributes="Italic" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Switch 3: Komplet style konvertering -->
+            <Frame BackgroundColor="LightCoral" Padding="15" CornerRadius="10">
+                <StackLayout>
+                    <Label Text="3. Komplet Style Konvertering" FontAttributes="Bold" FontSize="16" />
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="15">
+                        <Label Text="Learn more?" />
+                        <Switch x:Name="switch3" />
+                        <Label FontSize="18" VerticalOptions="Center">
+                            <Label.Style>
+                                <Binding Path="IsToggled" Source="{x:Reference switch3}">
+                                    <Binding.Converter>
+                                        <converters:BoolToObjectConverter x:TypeArguments="Style">
+                                            <converters:BoolToObjectConverter.TrueObject>
+                                                <Style TargetType="Label">
+                                                    <Setter Property="Text" Value="Indubitably!" />
+                                                    <Setter Property="FontAttributes" Value="Italic, Bold" />
+                                                    <Setter Property="TextColor" Value="Green" />
+                                                </Style>
+                                            </converters:BoolToObjectConverter.TrueObject>
+
+                                            <converters:BoolToObjectConverter.FalseObject>
+                                                <Style TargetType="Label">
+                                                    <Setter Property="Text" Value="Maybe later" />
+                                                    <Setter Property="FontAttributes" Value="None" />
+                                                    <Setter Property="TextColor" Value="Red" />
+                                                </Style>
+                                            </converters:BoolToObjectConverter.FalseObject>
+                                        </converters:BoolToObjectConverter>
+                                    </Binding.Converter>
+                                </Binding>
+                            </Label.Style>
+                        </Label>
+                    </StackLayout>
+
+                    <Label 
+                        Text="Boolean ? Style objekt (Text, FontAttributes, TextColor p� �n gang)"
+                        FontSize="12"
+                        TextColor="DarkRed"
+                        FontAttributes="Italic" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Bonus: Kombineret eksempel -->
+            <Frame BackgroundColor="LightYellow" Padding="15" CornerRadius="10">
+                <StackLayout>
+                    <Label Text="4. Bonus - Kombineret Eksempel" FontAttributes="Bold" FontSize="16" />
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="15">
+                        <Label Text="Dark Mode?" />
+                        <Switch x:Name="darkModeSwitch" />
+                    </StackLayout>
+
+                    <!-- Baggrund farve baseret p� switch -->
+                    <Frame Padding="20" CornerRadius="10">
+                        <Frame.BackgroundColor>
+                            <Binding Path="IsToggled" Source="{x:Reference darkModeSwitch}">
+                                <Binding.Converter>
+                                    <converters:BoolToObjectConverter
+                                        x:TypeArguments="Color"
+                                        FalseObject="White"
+                                        TrueObject="Black" />
+                                </Binding.Converter>
+                            </Binding>
+                        </Frame.BackgroundColor>
+
+                        <StackLayout>
+                            <Label Text="Dette er indholdet">
+                                <Label.TextColor>
+                                    <Binding Path="IsToggled" Source="{x:Reference darkModeSwitch}">
+                                        <Binding.Converter>
+                                            <converters:BoolToObjectConverter
+                                                x:TypeArguments="Color"
+                                                FalseObject="Black"
+                                                TrueObject="White" />
+                                        </Binding.Converter>
+                                    </Binding>
+                                </Label.TextColor>
+                            </Label>
+
+                            <Label>
+                                <Label.Text>
+                                    <Binding Path="IsToggled" Source="{x:Reference darkModeSwitch}">
+                                        <Binding.Converter>
+                                            <converters:BoolToObjectConverter
+                                                x:TypeArguments="x:String"
+                                                FalseObject="?? Light Mode Aktiveret"
+                                                TrueObject="?? Dark Mode Aktiveret" />
+                                        </Binding.Converter>
+                                    </Binding>
+                                </Label.Text>
+                                <Label.TextColor>
+                                    <Binding Path="IsToggled" Source="{x:Reference darkModeSwitch}">
+                                        <Binding.Converter>
+                                            <converters:BoolToObjectConverter
+                                                x:TypeArguments="Color"
+                                                FalseObject="Orange"
+                                                TrueObject="LightBlue" />
+                                        </Binding.Converter>
+                                    </Binding>
+                                </Label.TextColor>
+                            </Label>
+                        </StackLayout>
+                    </Frame>
+
+                    <Label 
+                        Text="Baggrund, tekst og farver �ndres dynamisk"
+                        FontSize="12"
+                        TextColor="DarkGoldenrod"
+                        FontAttributes="Italic" />
+                </StackLayout>
+            </Frame>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

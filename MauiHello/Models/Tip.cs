@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using MauiHello.Services;
 
 namespace MauiHello.Models
 {
@@ -10,8 +11,14 @@ namespace MauiHello.Models
         private string _billAmount = "0,00";
         private string _tipAmount = "0,00";
         private string _totalAmount = "0,00";
-        private double _tipPct = 15.0;
+        private double _tipPct;
         private CultureInfo _currentCulture = CultureInfo.CreateSpecificCulture("da-DK");
+
+        public Tip()
+        {
+            // Load the default tip percentage from settings
+            _tipPct = SettingsService.GetDefaultTipPercent();
+        }
 
         public string BillAmount
         {
@@ -59,9 +66,11 @@ namespace MauiHello.Models
             get => _tipPct;
             set
             {
-                if (_tipPct != value)
+                // Sørg for at tip procent er mellem 0 og 100
+                double validatedValue = Math.Max(0, Math.Min(100, value));
+                if (_tipPct != validatedValue)
                 {
-                    _tipPct = value;
+                    _tipPct = validatedValue;
                     OnPropertyChanged();
                     CalculateTip();
                 }
@@ -84,13 +93,47 @@ namespace MauiHello.Models
 
         public string TipPctDisplay => $"{(int)TipPct}%";
 
+        // Tilføjet property for decimal værdi af regning
+        public decimal BillAmountDecimal
+        {
+            get
+            {
+                if (decimal.TryParse(BillAmount, out decimal result))
+                {
+                    return Math.Max(0, result); // Sørg for at det er positivt
+                }
+                return 0;
+            }
+        }
+
+        // Tilføjet property for decimal værdi af tip
+        public decimal TipAmountDecimal
+        {
+            get
+            {
+                return BillAmountDecimal * (decimal)TipPct / 100;
+            }
+        }
+
+        // Tilføjet property for decimal værdi af total
+        public decimal TotalAmountDecimal
+        {
+            get
+            {
+                return BillAmountDecimal + TipAmountDecimal;
+            }
+        }
+
         private string ValidateInput(string input)
         {
             if (string.IsNullOrEmpty(input))
                 input = "";
 
+            // Fjern alle negative tegn først
+            input = input.Replace("-", "");
+
             // Only allow digits and one decimal separator
-            string decimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+            string decimalSeparator = CurrentCulture.NumberFormat.NumberDecimalSeparator;
             string pattern = $"[^0-9{Regex.Escape(decimalSeparator)}]";
             input = Regex.Replace(input, pattern, "");
 
@@ -105,59 +148,75 @@ namespace MauiHello.Models
                 }
             }
 
-            // Prevent negative numbers
-            if (input.StartsWith("-"))
-                input = input.TrimStart('-');
+            // Begræns til maksimalt 2 decimaler
+            if (firstSeparator >= 0 && input.Length > firstSeparator + 3)
+            {
+                input = input.Substring(0, firstSeparator + 3);
+            }
+
+            // Forhindre meget høje beløb (over 1 million)
+            if (decimal.TryParse(input, out decimal testValue) && testValue > 1000000)
+            {
+                input = "1000000" + decimalSeparator + "00";
+            }
 
             // If empty, set to 0.00
             if (string.IsNullOrWhiteSpace(input))
-                input = "0,00";
+                input = "0" + decimalSeparator + "00";
 
             return input;
         }
 
         public void CalculateTip()
         {
-            if (decimal.TryParse(BillAmount, out decimal bill))
-            {
-                decimal tip = bill * (decimal)TipPct / 100;
-                decimal total = bill + tip;
-                
-                TipAmount = tip.ToString("C", CurrentCulture);
-                TotalAmount = total.ToString("C", CurrentCulture);
-                
-                // For debugging purposes
-                Console.WriteLine($"Bill: {bill}, Tip%: {TipPct}, Tip: {tip}, Total: {total}");
-            }
-            else
-            {
-                TipAmount = "";
-                TotalAmount = "";
-            }
+            decimal bill = BillAmountDecimal;
+            decimal tip = TipAmountDecimal;
+            decimal total = TotalAmountDecimal;
+            
+            TipAmount = tip.ToString("C", CurrentCulture);
+            TotalAmount = total.ToString("C", CurrentCulture);
+            
+            // For debugging purposes
+            Console.WriteLine($"Bill: {bill}, Tip%: {TipPct}, Tip: {tip}, Total: {total}");
             
             OnPropertyChanged(nameof(TipPctDisplay));
+            OnPropertyChanged(nameof(BillAmountDecimal));
+            OnPropertyChanged(nameof(TipAmountDecimal));
+            OnPropertyChanged(nameof(TotalAmountDecimal));
         }
 
         public void RoundDown()
         {
-            if (decimal.TryParse(BillAmount, out decimal bill))
-            {
-                decimal tip = bill * (decimal)TipPct / 100;
-                decimal total = bill + tip;
-                total = Math.Floor(total);
-                TotalAmount = total.ToString("C", CurrentCulture);
-            }
+            decimal total = TotalAmountDecimal;
+            total = Math.Floor(total);
+            TotalAmount = total.ToString("C", CurrentCulture);
         }
 
         public void RoundUp()
         {
-            if (decimal.TryParse(BillAmount, out decimal bill))
+            decimal total = TotalAmountDecimal;
+            total = Math.Ceiling(total);
+            TotalAmount = total.ToString("C", CurrentCulture);
+        }
+
+        // Ny metode til at sætte en specifik tip værdi
+        public void SetTipPercentage(double percentage)
+        {
+            TipPct = Math.Max(0, Math.Min(100, percentage));
+        }
+
+        // Ny metode til at få en formateret tip beskrivelse
+        public string GetTipDescription()
+        {
+            return TipPct switch
             {
-                decimal tip = bill * (decimal)TipPct / 100;
-                decimal total = bill + tip;
-                total = Math.Ceiling(total);
-                TotalAmount = total.ToString("C", CurrentCulture);
-            }
+                < 10 => "Lav tip",
+                >= 10 and < 15 => "Standard tip",
+                >= 15 and < 20 => "God tip",
+                >= 20 and < 25 => "Generøs tip",
+                >= 25 => "Meget generøs tip",
+                _ => "Ingen tip"
+            };
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

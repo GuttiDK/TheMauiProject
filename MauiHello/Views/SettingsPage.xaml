@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiHello.Views.SettingsPage"
+             Title="Indstillinger">
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            
+            <!-- Header -->
+            <Label 
+                Text="Tip Indstillinger"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Margin="0,0,0,20" />
+
+            <!-- Current Default Tip Display -->
+            <Frame BackgroundColor="LightBlue" Padding="15" CornerRadius="10">
+                <StackLayout>
+                    <Label Text="Nuværende standard tip:" FontSize="16" FontAttributes="Bold" />
+                    <Label x:Name="currentTipLabel" 
+                           Text="{Binding CurrentDefaultTip, StringFormat='{0}%'}" 
+                           FontSize="20" 
+                           TextColor="DarkBlue" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Tip Percentage Slider -->
+            <StackLayout Spacing="10">
+                <Label Text="Vælg standard tip procent:" FontSize="16" FontAttributes="Bold" />
+                <Slider x:Name="tipSlider"
+                        Minimum="0"
+                        Maximum="30"
+                        Value="{Binding DefaultTipPercent}"
+                        ValueChanged="OnTipSliderChanged" />
+                <Label x:Name="tipValueLabel" 
+                       Text="{Binding Source={x:Reference tipSlider}, Path=Value, StringFormat='Tip: {0:F0}%'}"
+                       HorizontalOptions="Center"
+                       FontSize="16" />
+            </StackLayout>
+
+            <!-- Predefined Tip Buttons -->
+            <Label Text="Hurtige valg:" FontSize="16" FontAttributes="Bold" />
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                <Button Grid.Column="0" 
+                        Text="10%" 
+                        Clicked="OnPresetTipClicked" 
+                        CommandParameter="10"
+                        BackgroundColor="LightGray" />
+                <Button Grid.Column="1" 
+                        Text="15%" 
+                        Clicked="OnPresetTipClicked" 
+                        CommandParameter="15"
+                        BackgroundColor="LightBlue" />
+                <Button Grid.Column="2" 
+                        Text="20%" 
+                        Clicked="OnPresetTipClicked" 
+                        CommandParameter="20"
+                        BackgroundColor="LightGreen" />
+            </Grid>
+
+            <!-- Reset Switch -->
+            <Frame BackgroundColor="LightYellow" Padding="15" CornerRadius="10">
+                <StackLayout Orientation="Horizontal" Spacing="15">
+                    <Label Text="Nulstil til 15% standard:" 
+                           VerticalOptions="Center" 
+                           FontSize="16"
+                           HorizontalOptions="StartAndExpand" />
+                    <Switch x:Name="resetSwitch" 
+                            Toggled="OnResetSwitchToggled"
+                            VerticalOptions="Center" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Save Button -->
+            <Button Text="Gem Indstillinger" 
+                    Clicked="OnSaveClicked"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    FontSize="18"
+                    Margin="0,20,0,0" />
+
+            <!-- Information -->
+            <Frame BackgroundColor="LightGray" Padding="15" CornerRadius="10">
+                <Label Text="Denne indstilling vil blive brugt som standard i tip kalkulatoren næste gang du åbner appen."
+                       FontSize="14"
+                       TextColor="DarkGray"
+                       HorizontalOptions="Center" />
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

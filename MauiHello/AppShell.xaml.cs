@@ -10,6 +10,7 @@ namespace MauiHello
 
             Routing.RegisterRoute(nameof(Views.NotePage), typeof(Views.NotePage));
             Routing.RegisterRoute("DetailsPage", typeof(DetailsPage));
+            Routing.RegisterRoute(nameof(Views.MonkeyDetailsPage), typeof(Views.MonkeyDetailsPage));
         }
     }
 }

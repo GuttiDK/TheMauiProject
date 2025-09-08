@@ -16,6 +16,11 @@
     <FlyoutItem Title="Main" Icon="book.png" FlyoutDisplayOptions="AsMultipleItems">
         <Tab Title="Main">
             <ShellContent
+                Title="All Shops"
+                ContentTemplate="{DataTemplate views:ShopPage}"
+                Icon="coins.png" />
+
+            <ShellContent
                 Title="All Notes"
                 ContentTemplate="{DataTemplate views:AllNotesPage}"
                 Icon="file.png" />
@@ -34,6 +39,11 @@
                 Title="Register"
                 ContentTemplate="{DataTemplate views:CustomRegisterPage}"
                 Icon="user.png" />
+
+            <ShellContent
+                Title="Switch Demo"
+                ContentTemplate="{DataTemplate views:SwitchDemoPage}"
+                Icon="toggle.png" />
         </Tab>
     </FlyoutItem>
 
@@ -59,5 +69,4 @@
                 Icon="file.png" />
         </Tab>
     </FlyoutItem>
-
 </Shell>
