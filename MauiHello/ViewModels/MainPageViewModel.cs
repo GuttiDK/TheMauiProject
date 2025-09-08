@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows.Input;
 using MauiHello.Models;
 using MauiHello.Services;
 
@@ -11,10 +12,13 @@ namespace MauiHello.ViewModels
 
         public ObservableCollection<Monkey> Monkeys { get; } = new();
 
+        public ICommand GetMonkeysCommand { get; }
+
         public MainPageViewModel(MonkeyService monkeyService)
         {
             _monkeyService = monkeyService;
             Title = "Monkey Finder";
+            GetMonkeysCommand = new Command(async () => await GetMonkeysAsync());
         }
 
         public async Task GetMonkeysAsync()

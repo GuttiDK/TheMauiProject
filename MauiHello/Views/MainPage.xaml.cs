@@ -5,33 +5,25 @@ namespace MauiHello.Views
 {
     public partial class MainPage : ContentPage
     {
-        private readonly MainPageViewModel _viewModel;
-
         public MainPage(MainPageViewModel viewModel)
         {
             InitializeComponent();
-            _viewModel = viewModel;
-            BindingContext = _viewModel;
+            BindingContext = viewModel;
         }
 
         private async void AboutToolbarItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AboutPage(), true); // animated navigation
+            await Navigation.PushAsync(new AboutPage(), true);
         }
 
         private async void FeedbackToolbarItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new FeedbackPage(), true); // animated modal navigation
+            await Navigation.PushModalAsync(new FeedbackPage(), true);
         }
 
         private async void SettingsToolbarItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SettingsPage(), true); // animated navigation
-        }
-
-        private async void OnCounterClicked(object? sender, EventArgs e)
-        {
-            await _viewModel.GetMonkeysAsync();
+            await Navigation.PushAsync(new SettingsPage(), true);
         }
     }
 }
