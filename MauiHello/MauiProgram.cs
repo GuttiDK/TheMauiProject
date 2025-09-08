@@ -23,12 +23,14 @@ namespace MauiHello
 
             // Register ViewModels
             builder.Services.AddSingleton<MainPageViewModel>();
+            builder.Services.AddTransient<MonkeyDetailsPageViewModel>();
 
             // Register Views
             builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<MonkeyDetailsPage>();
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

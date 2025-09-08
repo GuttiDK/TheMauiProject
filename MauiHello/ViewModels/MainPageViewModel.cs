@@ -9,16 +9,28 @@ namespace MauiHello.ViewModels
     public class MainPageViewModel : BaseViewModel
     {
         private readonly MonkeyService _monkeyService;
+        private Command _getMonkeysCommand;
+        private Command<Monkey> _goToDetailsCommand;
 
-        public ObservableCollection<Monkey> Monkeys { get; } = new();
+        public ObservableCollection<Monkey> Monkeys { get; } = [];
 
-        public ICommand GetMonkeysCommand { get; }
+        public ICommand GetMonkeysCommand => _getMonkeysCommand ??= new Command(async () => await GetMonkeysAsync());
+
+        public ICommand GoToDetailsCommand => _goToDetailsCommand ??= new Command<Monkey>(async (monkey) =>
+        {
+            if (monkey == null)
+                return;
+
+            await Shell.Current.GoToAsync(nameof(Views.MonkeyDetailsPage), true, new Dictionary<string, object>
+            {
+                {"MyMonkey", monkey }
+            });
+        });
 
         public MainPageViewModel(MonkeyService monkeyService)
         {
             _monkeyService = monkeyService;
             Title = "Monkey Finder";
-            GetMonkeysCommand = new Command(async () => await GetMonkeysAsync());
         }
 
         public async Task GetMonkeysAsync()
@@ -46,6 +58,7 @@ namespace MauiHello.ViewModels
             finally
             {
                 IsBusy = false;
+                IsRefreshing = false; // Stop the refresh indicator
             }
         }
     }

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiHello.Views.MonkeyDetailsPage"
+             Title="{Binding Monkey.Name}">
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid ColumnDefinitions="*,Auto,*" RowDefinitions="160, Auto">
+                <BoxView
+                    Grid.ColumnSpan="3"
+                    Background="{StaticResource Primary}"
+                    HeightRequest="160"
+                    HorizontalOptions="FillAndExpand" />
+                <Frame
+                    Grid.RowSpan="2"
+                    Grid.Column="1"
+                    Margin="0,80,0,0"
+                    Padding="0"
+                    CornerRadius="80"
+                    HeightRequest="160"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    WidthRequest="160">
+                    <Image
+                        Aspect="AspectFill"
+                        HeightRequest="160"
+                        HorizontalOptions="Center"
+                        Source="{Binding Monkey.Image}"
+                        VerticalOptions="Center"
+                        WidthRequest="160" />
+                </Frame>
+            </Grid>
+
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Label 
+                    Text="{Binding Monkey.Name}"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center" />
+
+                <Label 
+                    Text="{Binding Monkey.Location}"
+                    FontSize="18"
+                    TextColor="Gray"
+                    HorizontalOptions="Center" />
+
+                <Frame BackgroundColor="LightBlue" Padding="15" CornerRadius="10">
+                    <StackLayout>
+                        <Label Text="Population" FontAttributes="Bold" FontSize="16" />
+                        <Label Text="{Binding Monkey.Population, StringFormat='{0:N0}'}" FontSize="20" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="LightGreen" Padding="15" CornerRadius="10">
+                    <StackLayout>
+                        <Label Text="Location Coordinates" FontAttributes="Bold" FontSize="16" />
+                        <Label Text="{Binding Monkey.Latitude, StringFormat='Latitude: {0:F4}'}" />
+                        <Label Text="{Binding Monkey.Longitude, StringFormat='Longitude: {0:F4}'}" />
+                    </StackLayout>
+                </Frame>
+
+                <Label 
+                    Text="Details"
+                    FontAttributes="Bold" 
+                    FontSize="18"
+                    Margin="0,10,0,5" />
+
+                <Label 
+                    Text="{Binding Monkey.Details}" 
+                    FontSize="16"
+                    LineHeight="1.4" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
