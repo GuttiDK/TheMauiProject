@@ -6,6 +6,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="About" Clicked="AboutToolbarItem_Clicked" />
         <ToolbarItem Text="Feedback" Clicked="FeedbackToolbarItem_Clicked" />
+        <ToolbarItem Text="Settings" Clicked="SettingsToolbarItem_Clicked" />
     </ContentPage.ToolbarItems>
 
     <ScrollView>

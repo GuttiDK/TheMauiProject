@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using MauiHello.Services;
+using MauiHello.ViewModels;
+using MauiHello.Views;
 
 namespace MauiHello
 {
@@ -14,6 +17,15 @@ namespace MauiHello
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            // Register services
+            builder.Services.AddSingleton<MonkeyService>();
+
+            // Register ViewModels
+            builder.Services.AddSingleton<MainPageViewModel>();
+
+            // Register Views
+            builder.Services.AddSingleton<MainPage>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

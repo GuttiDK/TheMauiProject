@@ -69,14 +69,4 @@
                 Icon="file.png" />
         </Tab>
     </FlyoutItem>
-
-    <FlyoutItem Title="Settings" Icon="file.png" FlyoutDisplayOptions="AsSingleItem">
-        <Tab>
-            <ShellContent
-                Title="Settings"
-                ContentTemplate="{DataTemplate views:SettingsPage}"
-                Icon="file.png" />
-        </Tab>
-    </FlyoutItem>
-
 </Shell>

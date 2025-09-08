@@ -1,13 +1,17 @@
 ﻿using Microsoft.Maui.Controls;
+using MauiHello.ViewModels;
 
 namespace MauiHello.Views
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-        public MainPage()
+        private readonly MainPageViewModel _viewModel;
+
+        public MainPage(MainPageViewModel viewModel)
         {
             InitializeComponent();
+            _viewModel = viewModel;
+            BindingContext = _viewModel;
         }
 
         private async void AboutToolbarItem_Clicked(object sender, EventArgs e)
@@ -20,16 +24,14 @@ namespace MauiHello.Views
             await Navigation.PushModalAsync(new FeedbackPage(), true); // animated modal navigation
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        private async void SettingsToolbarItem_Clicked(object sender, EventArgs e)
         {
-            count++;
+            await Navigation.PushAsync(new SettingsPage(), true); // animated navigation
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        private async void OnCounterClicked(object? sender, EventArgs e)
+        {
+            await _viewModel.GetMonkeysAsync();
         }
     }
 }
